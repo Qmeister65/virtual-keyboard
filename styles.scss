@@ -1,0 +1,58 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 1060px;
+  font-family: 'Noto Serif', sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+
+  &__key {
+    width: 60px;
+    height: 60px;
+    background: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+
+    &.ArrowUp, &.ArrowLeft, &.ArrowDown, &.ArrowRight {
+      background: #249D9F;
+    }
+
+    &.Backspace {
+      width: 150px;
+      background: #249D9F;
+    }
+
+    &.Tab {
+      width: 80px;
+      background: #249D9F;
+    }
+
+    &.CapsLock, &.Enter, &.ShiftLeft, &.ShiftRight{
+      width: 140px;
+      background: #249D9F;
+    }
+
+    &.Space {
+      width: 500px;
+      background: #249D9F;
+    }
+
+    &.ControlLeft, &.ControlRight, &.MetaLeft, &.AltLeft, &.AltRight, &.Del {
+      background: #249D9F
+    }
+  }
+}
