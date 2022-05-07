@@ -55,7 +55,7 @@ body {
   width: 500px;
   background: #249D9F;
 }
-.keyboard__key.ControlLeft, .keyboard__key.ControlRight, .keyboard__key.MetaLeft, .keyboard__key.AltLeft, .keyboard__key.AltRight, .keyboard__key.Del {
+.keyboard__key.ControlLeft, .keyboard__key.ControlRight, .keyboard__key.MetaLeft, .keyboard__key.AltLeft, .keyboard__key.AltRight, .keyboard__key.Delete {
   background: #249D9F;
 }
 .keyboard__key.active {

@@ -391,7 +391,7 @@ const keys = {
       shiftCaps: '/'
     }
   },
-  Del: {
+  Delete: {
     en: {
       lowerCase: 'Del',
       upperCase: 'Del',

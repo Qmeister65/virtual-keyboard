@@ -67,6 +67,18 @@ const clickHandler = (event) => {
               el.classList.remove('hidden');
             });
         }
+        if (!capsState && shiftState) {
+          element.querySelectorAll('.upperCase')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+          element.querySelectorAll('.shiftCaps')
+            .forEach(el => {
+              el.classList.remove('shown');
+              el.classList.add('hidden');
+            });
+        }
       });
     }
   } else if (textContent === 'Shift') {
@@ -165,10 +177,18 @@ const clickHandler = (event) => {
         langState = 'en';
       }
       keyboardArray.forEach(element => {
-        element.querySelector('.ru').classList.toggle('hidden');
-        element.querySelector('.ru').classList.toggle('current');
-        element.querySelector('.en').classList.toggle('hidden');
-        element.querySelector('.en').classList.toggle('current');
+        element.querySelector('.ru')
+          .classList
+          .toggle('hidden');
+        element.querySelector('.ru')
+          .classList
+          .toggle('current');
+        element.querySelector('.en')
+          .classList
+          .toggle('hidden');
+        element.querySelector('.en')
+          .classList
+          .toggle('current');
       });
       key.classList.add('active');
     } else {
@@ -179,6 +199,228 @@ const clickHandler = (event) => {
     key.classList.add('active');
   } else {
     key.classList.remove('active');
+  }
+};
+
+const pressHandler = (event) => {
+  event.preventDefault();
+  const textArea = document.querySelector('.textarea');
+  const keyboardArray = document.querySelectorAll('.keyboard__key');
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    if (event.type === 'keydown') {
+      shiftState = !shiftState;
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+      if (!capsState) {
+        keyboardArray.forEach(element => {
+          element.querySelectorAll('.upperCase')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+          element.querySelectorAll('.lowerCase')
+            .forEach(el => {
+              el.classList.add('hidden');
+              el.classList.remove('shown');
+            });
+        });
+      } else {
+        keyboardArray.forEach(element => {
+          element.querySelectorAll('.shiftCaps')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+          element.querySelectorAll('.caps')
+            .forEach(el => {
+              el.classList.add('hidden');
+              el.classList.remove('shown');
+            });
+        });
+      }
+    } else if (event.type === 'keyup') {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+      shiftState = !shiftState;
+      if (!capsState) {
+        keyboardArray.forEach(element => {
+          element.querySelectorAll('.upperCase')
+            .forEach(el => {
+              el.classList.add('hidden');
+              el.classList.remove('shown');
+            });
+          element.querySelectorAll('.lowerCase')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+        });
+      } else {
+        keyboardArray.forEach(element => {
+          element.querySelectorAll('.shiftCaps')
+            .forEach(el => {
+              el.classList.add('hidden');
+              el.classList.remove('shown');
+            });
+          element.querySelectorAll('.caps')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+        });
+      }
+    }
+  } else if (event.code === 'CapsLock') {
+    if (event.type === 'keydown') {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .toggle('active');
+      capsState = !capsState;
+      keyboardArray.forEach(element => {
+        if (capsState && !event.shiftKey) {
+          element.querySelectorAll('.caps')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+          element.querySelectorAll('.lowerCase')
+            .forEach(el => {
+              el.classList.add('hidden');
+              el.classList.remove('shown');
+            });
+        }
+        if (!capsState && !event.shiftKey) {
+          element.querySelectorAll('.caps')
+            .forEach(el => {
+              el.classList.add('hidden');
+              el.classList.remove('shown');
+            });
+          element.querySelectorAll('.lowerCase')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+        }
+        if (capsState && event.shiftKey) {
+          element.querySelectorAll('.upperCase')
+            .forEach(el => {
+              el.classList.remove('shown');
+              el.classList.add('hidden');
+            });
+          element.querySelectorAll('.shiftCaps')
+            .forEach(el => {
+              el.classList.add('shown');
+              el.classList.remove('hidden');
+            });
+        }
+        if (!capsState && event.shiftKey) {
+          element.querySelectorAll('.upperCase')
+            .forEach(el => {
+              el.classList.remove('hidden');
+              el.classList.add('shown');
+            });
+          element.querySelectorAll('.shiftCaps')
+            .forEach(el => {
+              el.classList.remove('shown');
+              el.classList.add('hidden');
+            });
+        }
+      });
+    }
+  } else if (event.code === 'AltLeft' || event.code === 'AltRight' || event.code === 'ControlLeft' || event.code === 'ControlRight') {
+    if (event.type === 'keydown') {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+    } else {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+    }
+  } else if (event.code === 'Enter') {
+    if (event.type === 'keydown') {
+      textArea.value += '\n';
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+    } else {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+    }
+  } else if (event.code === 'Delete') {
+    if (event.type === 'keydown') {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+    } else {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+    }
+  } else if (event.code === 'Backspace') {
+    if (event.type === 'keydown') {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+    } else {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+    }
+  } else if (event.metaKey) {
+    if (event.type === 'keydown') {
+      if (langState === 'en') {
+        langState = 'ru';
+      } else {
+        langState = 'en';
+      }
+      keyboardArray.forEach(element => {
+        element.querySelector('.ru')
+          .classList
+          .toggle('hidden');
+        element.querySelector('.ru')
+          .classList
+          .toggle('current');
+        element.querySelector('.en')
+          .classList
+          .toggle('hidden');
+        element.querySelector('.en')
+          .classList
+          .toggle('current');
+      });
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+    } else {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+    }
+  } else if (event.code === 'Tab') {
+    if (event.type === 'keydown') {
+      textArea.value += '\t';
+      document.querySelector(`.${event.code}`)
+        .classList
+        .add('active');
+    } else {
+      document.querySelector(`.${event.code}`)
+        .classList
+        .remove('active');
+    }
+  } else if (event.type === 'keydown') {
+    document.querySelector(`.${event.code}`)
+      .classList
+      .add('active');
+    textArea.value += document.querySelector(`.${event.code}`)
+      .querySelector('.current')
+      .getElementsByClassName('shown')[0].textContent;
+  } else if (event.type === 'keyup') {
+    document.querySelector(`.${event.code}`)
+      .classList
+      .remove('active');
   }
 };
 
@@ -231,3 +473,6 @@ const init = () => {
 };
 
 init();
+window.addEventListener('keydown', pressHandler);
+window.addEventListener('keyup', pressHandler);
+window.addEventListener('keypress', pressHandler);
