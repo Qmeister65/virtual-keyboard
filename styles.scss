@@ -9,6 +9,12 @@ body {
   display: none;
 }
 
+.textarea {
+  width: 1060px;
+  height: 200px;
+  margin: 20px;
+}
+
 .keyboard {
   display: flex;
   flex-wrap: wrap;
@@ -26,6 +32,9 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    transition: ease-in-out 100ms;
+    cursor: pointer;
+    user-select: none;
 
     &.ArrowUp, &.ArrowLeft, &.ArrowDown, &.ArrowRight {
       background: #249D9F;
@@ -53,6 +62,11 @@ body {
 
     &.ControlLeft, &.ControlRight, &.MetaLeft, &.AltLeft, &.AltRight, &.Del {
       background: #249D9F
+    }
+
+    &.active {
+      background: lightgreen;
+      border-radius: 100px;
     }
   }
 }

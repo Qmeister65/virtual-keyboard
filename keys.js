@@ -36,9 +36,9 @@ const keys = {
     },
     ru: {
       lowerCase: '2',
-      upperCase: '""',
+      upperCase: '"',
       caps: '2',
-      shiftCaps: '""'
+      shiftCaps: '"'
     }
   },
   Digit3: {
@@ -386,9 +386,9 @@ const keys = {
     },
     ru: {
       lowerCase: '\\',
-      upperCase: '|',
+      upperCase: '/',
       caps: '\\',
-      shiftCaps: '|'
+      shiftCaps: '/'
     }
   },
   Del: {
@@ -612,7 +612,7 @@ const keys = {
       lowerCase: 'я',
       upperCase: 'Я',
       caps: 'Я',
-      shiftCaps: 'Я'
+      shiftCaps: 'я'
     }
   },
   KeyX: {
@@ -693,10 +693,10 @@ const keys = {
       shiftCaps: 'm'
     },
     ru: {
-      lowerCase: 'о',
-      upperCase: 'О',
-      caps: 'О',
-      shiftCaps: 'о'
+      lowerCase: 'ь',
+      upperCase: 'Ь',
+      caps: 'Ь',
+      shiftCaps: 'ь'
     }
   },
   Comma: {

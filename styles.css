@@ -9,6 +9,12 @@ body {
   display: none;
 }
 
+.textarea {
+  width: 1060px;
+  height: 200px;
+  margin: 20px;
+}
+
 .keyboard {
   display: flex;
   flex-wrap: wrap;
@@ -26,6 +32,9 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  transition: ease-in-out 100ms;
+  cursor: pointer;
+  user-select: none;
 }
 .keyboard__key.ArrowUp, .keyboard__key.ArrowLeft, .keyboard__key.ArrowDown, .keyboard__key.ArrowRight {
   background: #249D9F;
@@ -48,6 +57,10 @@ body {
 }
 .keyboard__key.ControlLeft, .keyboard__key.ControlRight, .keyboard__key.MetaLeft, .keyboard__key.AltLeft, .keyboard__key.AltRight, .keyboard__key.Del {
   background: #249D9F;
+}
+.keyboard__key.active {
+  background: lightgreen;
+  border-radius: 100px;
 }
 
 /*# sourceMappingURL=styles.css.map */
