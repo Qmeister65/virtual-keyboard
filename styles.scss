@@ -1,0 +1,78 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  font-family: 'Noto Serif', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+}
+
+.hidden {
+  display: none;
+}
+
+.textarea {
+  width: 1060px;
+  height: 200px;
+  margin: 20px;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 1060px;
+  font-family: 'Noto Serif', sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+
+  &__key {
+    width: 60px;
+    height: 60px;
+    background: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: ease-in-out 100ms;
+    cursor: pointer;
+    user-select: none;
+
+    &.ArrowUp, &.ArrowLeft, &.ArrowDown, &.ArrowRight {
+      background: #249D9F;
+    }
+
+    &.Backspace {
+      width: 150px;
+      background: #249D9F;
+    }
+
+    &.Tab {
+      width: 80px;
+      background: #249D9F;
+    }
+
+    &.CapsLock, &.Enter, &.ShiftLeft, &.ShiftRight{
+      width: 140px;
+      background: #249D9F;
+    }
+
+    &.Space {
+      width: 500px;
+      background: #249D9F;
+    }
+
+    &.ControlLeft, &.ControlRight, &.MetaLeft, &.AltLeft, &.AltRight, &.Delete {
+      background: #249D9F
+    }
+
+    &.active {
+      background: lightgreen;
+      border-radius: 100px;
+    }
+  }
+}
