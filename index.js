@@ -2,7 +2,7 @@ import keys from './keys.js';
 
 let shiftState = false;
 let capsState = false;
-let langState = 'en';
+let langState = localStorage.getItem('langState') || 'en';
 
 const clickHandler = (event) => {
   event.preventDefault();
@@ -11,17 +11,32 @@ const clickHandler = (event) => {
   const cur = key.querySelector('.current');
   const textContent = cur.getElementsByClassName('shown')[0].textContent;
   const keyboardArray = document.querySelectorAll('.keyboard__key');
-
+  let position = textArea.selectionStart;
   if (textContent === 'Backspace') {
     if (event.type === 'mousedown') {
-      textArea.value = textArea.value.slice(0, textArea.value.length - 1);
-      key.classList.add('active');
-    } else {
-      key.classList.remove('active');
+      if (position > 0 && textArea.selectionStart === textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, position - 1)
+          + textArea.value.slice(position, textArea.value.length);
+        textArea.selectionStart = position - 1;
+        textArea.selectionEnd = position - 1;
+      }
+      if (textArea.selectionStart !== textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, textArea.selectionStart)
+          + textArea.value.slice(textArea.selectionEnd, textArea.value.length);
+        textArea.selectionStart = position;
+        textArea.selectionEnd = position;
+        key.classList.add('active');
+      } else {
+        key.classList.remove('active');
+      }
     }
   } else if (textContent === 'Tab') {
     if (event.type === 'mousedown') {
-      textArea.value += '\t';
+      textArea.value = textArea.value.slice(0, position) + '\t'
+        + textArea.value.slice(position, textArea.value.length);
+      position += 1;
+      textArea.selectionStart = position;
+      textArea.selectionEnd = position;
       key.classList.add('active');
     } else {
       key.classList.remove('active');
@@ -158,7 +173,11 @@ const clickHandler = (event) => {
     }
   } else if (textContent === 'Enter') {
     if (event.type === 'mousedown') {
-      textArea.value += '\n';
+      textArea.value = textArea.value.slice(0, position) + '\n'
+        + textArea.value.slice(position, textArea.value.length);
+      position += 1;
+      textArea.selectionStart = position;
+      textArea.selectionEnd = position;
       key.classList.add('active');
     } else {
       key.classList.remove('active');
@@ -166,6 +185,16 @@ const clickHandler = (event) => {
   } else if (textContent === 'Del') {
     if (event.type === 'mousedown') {
       key.classList.add('active');
+      if (position >= 0 && textArea.selectionStart === textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, position)
+          + textArea.value.slice(position + 1, textArea.value.length);
+      }
+      if (textArea.selectionStart !== textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, textArea.selectionStart)
+          + textArea.value.slice(textArea.selectionEnd, textArea.value.length);
+      }
+      textArea.selectionStart = position;
+      textArea.selectionEnd = position;
     } else {
       key.classList.remove('active');
     }
@@ -195,7 +224,11 @@ const clickHandler = (event) => {
       key.classList.remove('active');
     }
   } else if (event.type === 'mousedown') {
-    document.querySelector('.textarea').value += cur.getElementsByClassName('shown')[0].textContent;
+    textArea.value = textArea.value.slice(0, position) + cur.getElementsByClassName('shown')[0].textContent
+        + textArea.value.slice(position, textArea.value.length);
+    position += 1;
+    textArea.selectionStart = position;
+    textArea.selectionEnd = position;
     key.classList.add('active');
   } else {
     key.classList.remove('active');
@@ -205,6 +238,7 @@ const clickHandler = (event) => {
 const pressHandler = (event) => {
   event.preventDefault();
   const textArea = document.querySelector('.textarea');
+  let position = textArea.selectionStart;
   const keyboardArray = document.querySelectorAll('.keyboard__key');
   if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
     if (event.type === 'keydown') {
@@ -341,7 +375,11 @@ const pressHandler = (event) => {
     }
   } else if (event.code === 'Enter') {
     if (event.type === 'keydown') {
-      textArea.value += '\n';
+      textArea.value = textArea.value.slice(0, position) + '\n'
+        + textArea.value.slice(position, textArea.value.length);
+      position += 1;
+      textArea.selectionStart = position;
+      textArea.selectionEnd = position;
       document.querySelector(`.${event.code}`)
         .classList
         .add('active');
@@ -355,6 +393,16 @@ const pressHandler = (event) => {
       document.querySelector(`.${event.code}`)
         .classList
         .add('active');
+      if (position >= 0 && textArea.selectionStart === textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, position)
+          + textArea.value.slice(position + 1, textArea.value.length);
+      }
+      if (textArea.selectionStart !== textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, textArea.selectionStart)
+          + textArea.value.slice(textArea.selectionEnd, textArea.value.length);
+      }
+      textArea.selectionStart = position;
+      textArea.selectionEnd = position;
     } else {
       document.querySelector(`.${event.code}`)
         .classList
@@ -365,6 +413,18 @@ const pressHandler = (event) => {
       document.querySelector(`.${event.code}`)
         .classList
         .add('active');
+      if (position > 0 && textArea.selectionStart === textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, position - 1)
+          + textArea.value.slice(position, textArea.value.length);
+        textArea.selectionStart = position - 1;
+        textArea.selectionEnd = position - 1;
+      }
+      if (textArea.selectionStart !== textArea.selectionEnd) {
+        textArea.value = textArea.value.slice(0, textArea.selectionStart)
+          + textArea.value.slice(textArea.selectionEnd, textArea.value.length);
+        textArea.selectionStart = position;
+        textArea.selectionEnd = position;
+      }
     } else {
       document.querySelector(`.${event.code}`)
         .classList
@@ -401,7 +461,11 @@ const pressHandler = (event) => {
     }
   } else if (event.code === 'Tab') {
     if (event.type === 'keydown') {
-      textArea.value += '\t';
+      textArea.value = textArea.value.slice(0, position) + '\t'
+        + textArea.value.slice(position, textArea.value.length);
+      position += 1;
+      textArea.selectionStart = position;
+      textArea.selectionEnd = position;
       document.querySelector(`.${event.code}`)
         .classList
         .add('active');
@@ -414,9 +478,13 @@ const pressHandler = (event) => {
     document.querySelector(`.${event.code}`)
       .classList
       .add('active');
-    textArea.value += document.querySelector(`.${event.code}`)
+    textArea.value = textArea.value.slice(0, position) + document.querySelector(`.${event.code}`)
       .querySelector('.current')
-      .getElementsByClassName('shown')[0].textContent;
+      .getElementsByClassName('shown')[0].textContent
+      + textArea.value.slice(position, textArea.value.length);
+    position += 1;
+    textArea.selectionStart = position;
+    textArea.selectionEnd = position;
   } else if (event.type === 'keyup') {
     document.querySelector(`.${event.code}`)
       .classList
@@ -424,13 +492,20 @@ const pressHandler = (event) => {
   }
 };
 
-const createKey = (key) => {
+const createKey = (key, lang) => {
   const keyboardKey = document.createElement('div');
   keyboardKey.classList.add('keyboard__key', key[0]);
   const keyboardKeyEn = document.createElement('span');
-  keyboardKeyEn.classList.add('en', 'current');
+
   const keyboardKeyRu = document.createElement('span');
-  keyboardKeyRu.classList.add('ru', 'hidden');
+  if (lang === 'en') {
+    keyboardKeyEn.classList.add('en', 'current');
+    keyboardKeyRu.classList.add('ru', 'hidden');
+  } else {
+    keyboardKeyEn.classList.add('en', 'hidden');
+    keyboardKeyRu.classList.add('ru', 'current');
+  }
+
   Object.entries(key[1].en)
     .forEach(element => {
       const content = document.createElement('span');
@@ -465,14 +540,19 @@ const init = () => {
   keyboard.classList.add('keyboard');
   Object.entries(keys)
     .forEach(key => {
-      keyboard.append(createKey(key));
+      keyboard.append(createKey(key, langState));
     });
   const textarea = document.createElement('textarea');
   textarea.classList.add('textarea');
-  document.body.prepend(textarea, keyboard);
+  const langSwitchInfo = document.createElement('p');
+  langSwitchInfo.textContent = 'Для переключения языка используется metaKey (Win)';
+  const osInfo = document.createElement('p');
+  osInfo.textContent = 'Клавиатура создана в ОС Windows';
+  document.body.prepend(textarea, keyboard, langSwitchInfo, osInfo);
 };
 
 init();
 window.addEventListener('keydown', pressHandler);
 window.addEventListener('keyup', pressHandler);
 window.addEventListener('keypress', pressHandler);
+window.addEventListener('beforeunload', () => localStorage.setItem('langState', langState));
