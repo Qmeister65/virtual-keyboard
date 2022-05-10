@@ -490,6 +490,27 @@ const pressHandler = (event) => {
       .classList
       .remove('active');
   }
+  if (event.ctrlKey && event.altKey && event.type === 'keydown') {
+    if (langState === 'en') {
+      langState = 'ru';
+    } else {
+      langState = 'en';
+    }
+    keyboardArray.forEach(element => {
+      element.querySelector('.ru')
+        .classList
+        .toggle('hidden');
+      element.querySelector('.ru')
+        .classList
+        .toggle('current');
+      element.querySelector('.en')
+        .classList
+        .toggle('hidden');
+      element.querySelector('.en')
+        .classList
+        .toggle('current');
+    });
+  }
 };
 
 const createKey = (key, lang) => {
