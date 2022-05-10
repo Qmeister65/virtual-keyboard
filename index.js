@@ -566,7 +566,7 @@ const init = () => {
   const textarea = document.createElement('textarea');
   textarea.classList.add('textarea');
   const langSwitchInfo = document.createElement('p');
-  langSwitchInfo.textContent = 'Для переключения языка используется metaKey (Win)';
+  langSwitchInfo.textContent = 'Для переключения языка используется metaKey (Win) или комбинация ctrl + alt';
   const osInfo = document.createElement('p');
   osInfo.textContent = 'Клавиатура создана в ОС Windows';
   document.body.prepend(textarea, keyboard, langSwitchInfo, osInfo);
