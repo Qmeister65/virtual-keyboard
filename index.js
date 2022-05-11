@@ -25,10 +25,9 @@ const clickHandler = (event) => {
           + textArea.value.slice(textArea.selectionEnd, textArea.value.length);
         textArea.selectionStart = position;
         textArea.selectionEnd = position;
-        key.classList.add('active');
-      } else {
-        key.classList.remove('active');
-      }
+      } key.classList.add('active');
+    } else {
+      key.classList.remove('active');
     }
   } else if (textContent === 'Tab') {
     if (event.type === 'mousedown') {
