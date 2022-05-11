@@ -1,0 +1,72 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  font-family: "Noto Serif", sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+}
+
+.hidden {
+  display: none;
+}
+
+.textarea {
+  width: 1060px;
+  height: 200px;
+  margin: 20px;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 1060px;
+  font-family: "Noto Serif", sans-serif;
+  font-weight: 700;
+  font-size: 21px;
+}
+.keyboard__key {
+  width: 60px;
+  height: 60px;
+  background: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  transition: ease-in-out 100ms;
+  cursor: pointer;
+  user-select: none;
+}
+.keyboard__key.ArrowUp, .keyboard__key.ArrowLeft, .keyboard__key.ArrowDown, .keyboard__key.ArrowRight {
+  background: #249D9F;
+}
+.keyboard__key.Backspace {
+  width: 150px;
+  background: #249D9F;
+}
+.keyboard__key.Tab {
+  width: 80px;
+  background: #249D9F;
+}
+.keyboard__key.CapsLock, .keyboard__key.Enter, .keyboard__key.ShiftLeft, .keyboard__key.ShiftRight {
+  width: 140px;
+  background: #249D9F;
+}
+.keyboard__key.Space {
+  width: 500px;
+  background: #249D9F;
+}
+.keyboard__key.ControlLeft, .keyboard__key.ControlRight, .keyboard__key.MetaLeft, .keyboard__key.AltLeft, .keyboard__key.AltRight, .keyboard__key.Delete {
+  background: #249D9F;
+}
+.keyboard__key.active {
+  background: lightgreen;
+  border-radius: 100px;
+}
+
+/*# sourceMappingURL=styles.css.map */
